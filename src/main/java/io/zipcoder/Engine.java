@@ -1,9 +1,8 @@
 package io.zipcoder;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import javax.xml.bind.SchemaOutputResolver;
+import java.util.*;
 
 public class Engine {
 
@@ -66,7 +65,22 @@ public class Engine {
         for (Pet obj : petInfo) {
             System.out.println(obj.getName() + " says " + obj.speak());
         }
-        // }
+        //calls comparable compareTo that overrides sort
+        Collections.sort(petInfo);
+        int count = 0;
+        for (Pet obj : petInfo){
+            count++;
+            System.out.println("Pet " + count + " : " + obj.getName() + " " + obj.speak());
+        }
+
+        //calls comparator that sorts by object class name and then object field name
+        Collections.sort(petInfo, Pet.PetTypeComparator);
+            for(Pet obj: petInfo){
+                System.out.println("I am a " + obj.getClass().getSimpleName());
+            }
+
+
+
 
     }
 }

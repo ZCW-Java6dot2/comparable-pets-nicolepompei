@@ -1,5 +1,6 @@
 package io.zipcoder;
-
+import java.lang.Comparable;
+import java.util.Comparator;
 
 public class Pet implements Comparable<Pet> {
     String name;
@@ -36,20 +37,33 @@ public class Pet implements Comparable<Pet> {
      * <p>
      * in THIS compareTo fn: compared the current instance of the object's name to previous (left) or next (right). see comments in method.
      *
-     * @param o
+     * In this method I compared the current instance of the objects name to the previous(or next instance of the object..
+     *  * code for compareTo does that). if it's 0 it falls through to the second return statement. if returns 1 or -1 then
+     *  * it returns that value. Second return statement sorts it by speak.
+     *
+     *
+     * @param otherPet
      * @return
      */
 
+    @Override
     public int compareTo(Pet otherPet) {
-        // -1 means what is on the left is less than what is on the right (our comparing value)
-        if (this.getName() > otherPet.getName()) {
-            return -1;
-            // 1 means what is on the left is greater than what is on the right (our comparing value)
-        } else if (this.getName() < otherPet.getName()) {
-            return 1;
-            // means that the names are equals so do a string comparison of the object type??
+        int equality = this.name.compareTo(otherPet.name);
+        if (equality != 0) {
+            return equality;
         } else {
             return this.getName().compareTo(otherPet.getName());
         }
     }
-}
+
+//implemented comparator as the obj comparator NOT the interface. instantiated a new comparator object to ONLY override the compare method.
+    //
+    public static Comparator<Pet> PetTypeComparator = new Comparator<Pet>() {
+        @Override
+        public int compare(Pet pet1, Pet pet2) {
+            int equality = pet1.getClass().getSimpleName().compareTo(pet2.getClass().getSimpleName());
+            if (equality != 0) {
+                return equality;
+            } else {return pet1.getName().compareTo(pet2.getName());}
+    }
+};}
