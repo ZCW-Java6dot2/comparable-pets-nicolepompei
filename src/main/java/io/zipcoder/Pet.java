@@ -56,6 +56,12 @@ public class Pet implements Comparable<Pet> {
         }
     }
 
+    @Override
+    public String toString(){
+        return "Pet name = " + name + "\n";
+
+    }
+
 //implemented comparator as the obj comparator NOT the interface. instantiated a new comparator object to ONLY override the compare method.
     //
     public static Comparator<Pet> PetTypeComparator = new Comparator<Pet>() {
